@@ -1,5 +1,6 @@
 package io.github.invvk.mony.database.storages;
 
+import io.github.invvk.mony.database.storage.IStorage;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

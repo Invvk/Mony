@@ -1,6 +1,6 @@
-package io.github.invvk.mony.database.data;
+package io.github.invvk.mony.database.manager;
 
-import io.github.invvk.mony.database.misc.User;
+import io.github.invvk.mony.database.User;
 
 import java.util.UUID;
 

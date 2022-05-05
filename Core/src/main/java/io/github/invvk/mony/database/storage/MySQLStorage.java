@@ -5,6 +5,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import io.github.invvk.mony.MonyLoader;
 import io.github.invvk.mony.config.properties.ConfigProperty;
+import io.github.invvk.mony.database.storage.IStorage;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
