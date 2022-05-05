@@ -29,4 +29,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Mony artifact
-          path: "${{ github.workspace }}/build/libs/Mony.jar"
+          path: "${{ github.workspace }}/Core/build/libs/Mony.jar"
