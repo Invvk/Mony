@@ -21,7 +21,7 @@ jobs:
       uses: gradle/gradle-build-action@v2
 
     - name: Run tests before building
-      run: ./gradlew test
+      run: gradle test
 
     - name: Build with Gradle
-      run: ./gradlew build
+      run: gradle build

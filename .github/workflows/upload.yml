@@ -23,7 +23,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Build with Gradle
-        run: ./gradlew build
+        run: gradle build
 
       - name: Create Dev Build
         uses: actions/upload-artifact@v2
