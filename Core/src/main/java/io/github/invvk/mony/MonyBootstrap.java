@@ -1,6 +1,7 @@
 package io.github.invvk.mony;
 
 import io.github.invvk.mony.config.ConfigManager;
+import io.github.invvk.mony.database.storage.IStorage;
 import io.github.invvk.mony.hook.VaultHook;
 import io.github.invvk.mony.listener.MobKillListener;
 import io.github.invvk.mony.database.StorageManager;
@@ -11,7 +12,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 
 @RequiredArgsConstructor
-public class MonyBootstrap {
+public class MonyBootstrap implements Mony{
 
     private final MonyLoader loader;
 
@@ -40,7 +41,7 @@ public class MonyBootstrap {
     }
 
     private void initial() {
-        this.configManager = new ConfigManager(this.loader);
+        this.configManager = new ConfigManager(this.loader.getDataFolder());
         this.storageManager = new StorageManager(this.loader);
         this.userManager = new UserManager(this.loader);
     }
@@ -48,6 +49,21 @@ public class MonyBootstrap {
     private void registerListeners(Listener... listeners) {
         for (Listener listener: listeners)
             Bukkit.getPluginManager().registerEvents(listener, this.loader);
+    }
+
+    @Override
+    public IStorage getStorage() {
+        return this.storageManager.getStorage();
+    }
+
+    @Override
+    public boolean isTestEnvironment() {
+        return this.loader.isTestEnvironment();
+    }
+
+    @Override
+    public String getVersion() {
+        return this.loader.getDescription().getVersion();
     }
 
 }

@@ -4,15 +4,14 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import io.github.invvk.mony.MonyLoader;
 import io.github.invvk.mony.config.properties.ConfigProperty;
-import io.github.invvk.mony.database.data.IDataManager;
-import io.github.invvk.mony.database.misc.User;
+import io.github.invvk.mony.database.manager.IDataManager;
 import lombok.SneakyThrows;
 import org.bukkit.Bukkit;
 
 import java.util.Optional;
 import java.util.UUID;
 
-public class UserManager {
+public class UserManager implements IUserManager {
 
     private final Cache<UUID, User> usersCache = CacheBuilder.newBuilder()
             .build();
@@ -34,6 +33,7 @@ public class UserManager {
      * @param uniqueId unique id of the desired user
      * @return Nullable Optional of the desired user
      */
+    @Override
     public Optional<User> getUser(UUID uniqueId) {
         return Optional.ofNullable(usersCache.getIfPresent(uniqueId));
     }
@@ -45,6 +45,7 @@ public class UserManager {
      * @param name     name of the player
      */
     @SneakyThrows
+    @Override
     public void createUser(UUID uniqueId, String name) {
         this.usersCache.get(uniqueId, () -> dataManager.getUserFromDatabase(uniqueId, name));
     }
@@ -54,7 +55,8 @@ public class UserManager {
      *
      * @param uniqueId unqiue id of the player to be removed
      */
-    public void removeUser(UUID uniqueId) {
+    @Override
+    public void invalidate(UUID uniqueId) {
         final User user = this.usersCache.getIfPresent(uniqueId);
         if (user == null)
             return;
@@ -63,6 +65,7 @@ public class UserManager {
         this.usersCache.invalidate(uniqueId);
     }
 
+    @Override
     public void invalidateAll() {
         // Save before Invalidating all user cache
         usersCache.asMap()

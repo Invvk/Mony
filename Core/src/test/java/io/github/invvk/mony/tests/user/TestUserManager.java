@@ -3,7 +3,7 @@ package io.github.invvk.mony.tests.user;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import io.github.invvk.mony.MonyLoader;
-import io.github.invvk.mony.database.misc.User;
+import io.github.invvk.mony.database.User;
 import org.junit.jupiter.api.*;
 
 import java.util.UUID;

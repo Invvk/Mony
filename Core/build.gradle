@@ -1,0 +1,51 @@
+plugins {
+    id 'java-library'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+group 'io.github.invvk'
+version project.ext.fullVer
+
+dependencies {
+    compileOnly 'com.github.MilkBowl:VaultAPI:1.7'
+    //noinspection GradlePackageUpdate
+    implementation 'com.zaxxer:HikariCP:4.0.3'
+
+    implementation project(":API")
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+    testImplementation 'com.github.seeseemelk:MockBukkit-v1.13:0.2.0'
+}
+
+shadowJar {
+    // set a destination directory if 'WORKING_BASE' property exists.
+    if (project.hasProperty("WORKING_BASE")) {
+        destinationDirectory = file(project.getProperties().get("WORKING_BASE"))
+    }
+
+    archiveBaseName.set('Mony')
+    archiveClassifier.set('')
+    archiveVersion.set('')
+
+    exclude 'META-INF/**'
+    exclude 'LICENSE'
+
+    relocate 'com.zaxxer.hikari', 'io.github.invvk.mony.relocate.hikaricp'
+    relocate 'ch.jalu.configme', 'io.github.invvk.mony.relocate.configme'
+    relocate 'org.slf4j', 'io.github.invvk.mony.relocate.slf4j'
+
+    // filter unnecessary dependencies
+    dependencies {
+        exclude(dependency(':snakeyaml:.*'))
+    }
+}
+
+tasks.build.dependsOn(shadowJar)
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "skipped", "failed"
+    }
+    ignoreFailures = false
+}

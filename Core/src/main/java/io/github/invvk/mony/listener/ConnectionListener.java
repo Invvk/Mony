@@ -28,7 +28,7 @@ public class ConnectionListener implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         executor.execute(() -> loader.getBootstrap().getUserManager().
-                removeUser(event.getPlayer().getUniqueId()));
+                invalidate(event.getPlayer().getUniqueId()));
     }
 
 }

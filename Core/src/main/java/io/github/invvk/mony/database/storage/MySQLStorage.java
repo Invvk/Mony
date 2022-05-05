@@ -1,11 +1,12 @@
-package io.github.invvk.mony.database.storages;
+package io.github.invvk.mony.database.storage;
 
 import ch.jalu.configme.SettingsManager;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import io.github.invvk.mony.MonyLoader;
 import io.github.invvk.mony.config.properties.ConfigProperty;
-import io.github.invvk.mony.database.storage.IStorage;
+import io.github.invvk.mony.database.manager.IDataManager;
+import io.github.invvk.mony.database.manager.MySQLDataManager;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -28,6 +29,8 @@ public class MySQLStorage implements IStorage {
     @Getter private String pdTable;
 
     private HikariDataSource dataSource;
+
+    private MySQLDataManager dataManager;
 
     @Override
     public void init() {
@@ -66,6 +69,8 @@ public class MySQLStorage implements IStorage {
 
         dataSource = new HikariDataSource(config);
         this.initTable();
+
+        this.dataManager = new MySQLDataManager(this);
     }
 
     private void initTable() {
@@ -85,6 +90,11 @@ public class MySQLStorage implements IStorage {
     public void close() {
         if (this.dataSource != null)
             this.dataSource.close();
+    }
+
+    @Override
+    public IDataManager getDataManager() {
+        return this.dataManager;
     }
 
     public final Connection getConnection() throws SQLException {

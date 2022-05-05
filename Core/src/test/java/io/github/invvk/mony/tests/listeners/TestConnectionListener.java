@@ -47,7 +47,7 @@ public class TestConnectionListener {
         // This simulates on quit. the only difference is that the event inside the class ConnectionListener
         // runs this method async due to the fact that it is a
         // thread blocking action. (Database queries - IO operation [Saving User File])
-        plugin.getBootstrap().getUserManager().removeUser(mock.getUniqueId());
+        plugin.getBootstrap().getUserManager().invalidate(mock.getUniqueId());
 
         // This checks if the user was removed from the cache successfully
         assertFalse(plugin.getBootstrap().getUserManager().getUser(mock.getUniqueId()).isPresent(),

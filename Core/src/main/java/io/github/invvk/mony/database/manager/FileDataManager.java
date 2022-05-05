@@ -1,8 +1,8 @@
-package io.github.invvk.mony.database.data;
+package io.github.invvk.mony.database.manager;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import io.github.invvk.mony.database.misc.User;
+import io.github.invvk.mony.database.User;
 import lombok.RequiredArgsConstructor;
 
 import java.io.File;
