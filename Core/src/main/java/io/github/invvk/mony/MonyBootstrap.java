@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.ServicePriority;
 
 @RequiredArgsConstructor
 public class MonyBootstrap implements Mony{
@@ -26,6 +27,8 @@ public class MonyBootstrap implements Mony{
 
     public void enable() {
         this.initial();
+        Bukkit.getServicesManager().register(Mony.class, this, this.loader, ServicePriority.Highest);
+
         this.vault = new VaultHook(this.loader);
 
         this.registerListeners(new MobKillListener(this));

@@ -34,8 +34,6 @@ public final class MonyLoader extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        Bukkit.getServicesManager().register(Mony.class, bootstrap, this, ServicePriority.Highest);
-
         if (testEnvironment)
             bootstrap.enableUnitTest();
         else
