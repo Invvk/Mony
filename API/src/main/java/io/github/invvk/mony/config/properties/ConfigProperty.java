@@ -2,9 +2,11 @@ package io.github.invvk.mony.config.properties;
 
 import ch.jalu.configme.Comment;
 import ch.jalu.configme.SettingsHolder;
+import ch.jalu.configme.properties.BeanProperty;
 import ch.jalu.configme.properties.IntegerProperty;
 import ch.jalu.configme.properties.Property;
 import ch.jalu.configme.properties.StringProperty;
+import io.github.invvk.mony.config.properties.bean.MobBean;
 
 public class ConfigProperty implements SettingsHolder {
 
@@ -37,5 +39,43 @@ public class ConfigProperty implements SettingsHolder {
 
     public static Property<String> TIME_STAMP = new StringProperty("settings.timestamp",
             "0:00");
+
+    @Comment({
+            "this section controls how the mob prices work",
+            "You can set a global price and set a price per Mob",
+            "If the mob doesn't exists in the custom_price section, then it will default to defaultPrice and default multiplier",
+            "",
+            "To configure an entity, please make sure that the names matches in this link: ",
+            "WARNING: PLEASE MAKE SURE THAT YOU CHOOSE ENTITIES THAT MATCHES YOUR SERVER VERSION",
+            "",
+            "1.18: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/EntityType.html",
+            "1.12.2: https://helpch.at/docs/1.12.2/org/bukkit/entity/EntityType.html",
+            "1.8: https://helpch.at/docs/1.8.8/org/bukkit/entity/EntityType.html",
+            "",
+            "$$$ Example Configuration $$$",
+            "",
+            "enconomy:",
+            "  Default price for any mob if they don't have any configuration",
+            "  defaultPrice: 100.0",
+            "  ",
+            "  # Combo multiplier that will add up to the kill price",
+            "  comboMultiplier: 1.0",
+            "  ",
+            "  # disable combo multiplier?",
+            "  disableComboGlobally: false",
+            "  ",
+            "  custom_price:",
+            "    ZOMBIE:",
+            "      # Money to be given after killing this mob",
+            "      price: 120.0",
+            "      ",
+            "      # Combo multiplier that will add up to the kill price",
+            "      multiplier: 1.2",
+            "      ",
+            "      # This will disable combo checks for Zombies, this have priority over disableComboGlobally",
+            "      disableCombo: true",
+            ""})
+    public static Property<MobBean> MOB_PRICE = new BeanProperty<>(MobBean.class, "economy",
+            new MobBean());
 
 }
