@@ -10,7 +10,7 @@ dependencies {
     compileOnly 'com.github.MilkBowl:VaultAPI:1.7'
     //noinspection GradlePackageUpdate
     implementation 'com.zaxxer:HikariCP:4.0.3'
-
+    implementation 'org.bstats:bstats-bukkit:3.0.0'
     implementation project(":API")
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
@@ -34,6 +34,7 @@ shadowJar {
     relocate 'com.zaxxer.hikari', 'io.github.invvk.mony.relocate.hikaricp'
     relocate 'ch.jalu.configme', 'io.github.invvk.mony.relocate.configme'
     relocate 'org.slf4j', 'io.github.invvk.mony.relocate.slf4j'
+    relocate 'org.bstats', 'io.github.invvk.mony.relocate.bstats'
 
     // filter unnecessary dependencies
     dependencies {
