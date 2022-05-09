@@ -28,7 +28,7 @@ public class TestConnectionListener {
     static void initAll() {
         server = MockBukkit.mock();
         plugin = MockBukkit.load(MonyLoader.class);
-        listener = new ConnectionListener(plugin);
+        listener = new ConnectionListener(plugin.getBootstrap());
     }
 
     @Test
