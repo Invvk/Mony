@@ -5,6 +5,7 @@ import io.github.invvk.mony.database.StorageManager;
 import io.github.invvk.mony.database.UserManager;
 import io.github.invvk.mony.database.storage.IStorage;
 import io.github.invvk.mony.hook.VaultHook;
+import io.github.invvk.mony.listener.ConnectionListener;
 import io.github.invvk.mony.listener.MobKillListener;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -39,7 +40,7 @@ public class MonyBootstrap implements Mony{
 
         this.vault = new VaultHook(this.loader);
 
-        this.registerListeners(new MobKillListener(this));
+        this.registerListeners(new MobKillListener(this), new ConnectionListener(this));
         this.enableMetrics();
     }
 
