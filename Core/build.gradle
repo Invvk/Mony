@@ -16,6 +16,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
     testImplementation 'org.mockito:mockito-core:4.5.1'
     testImplementation 'com.github.seeseemelk:MockBukkit-v1.13:0.2.0'
+    testImplementation 'com.github.MilkBowl:VaultAPI:1.7'
 }
 
 shadowJar {
