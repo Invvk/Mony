@@ -17,16 +17,19 @@ public class PlayerKillMobEvent extends PlayerEvent implements Cancellable {
 
     @Getter private final EntityType type;
 
-    @Getter @Setter private int money;
+    @Getter @Setter private double amount;
+
+    @Getter private final double originalAmount;
 
     @Getter @Setter
     private boolean cancelled = false;
 
-    public PlayerKillMobEvent(Player player, Entity mob, int money) {
+    public PlayerKillMobEvent(Player player, Entity mob, double amount) {
         super(player);
         this.mob = mob;
         this.type = mob.getType();
-        this.money = money;
+        this.amount = amount;
+        this.originalAmount = amount;
     }
 
     @Override

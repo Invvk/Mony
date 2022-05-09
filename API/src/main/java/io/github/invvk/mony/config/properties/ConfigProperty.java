@@ -37,8 +37,13 @@ public class ConfigProperty implements SettingsHolder {
     public static Property<Integer> UPDATE_INTERVAL = new IntegerProperty(
             "Settings.data-update-interval", 30);
 
-    public static Property<String> TIME_STAMP = new StringProperty("settings.timestamp",
-            "0:00");
+    public static Property<String> DAILY_LIMIT_COOLDOWN
+            = new StringProperty("settings.daily-limit.cooldown",
+            "8h");
+
+    public static Property<Integer> DAILY_LIMIT_MAX_AMOUNT
+            = new IntegerProperty("settings.daily-limit.max-amount",
+            1000);
 
     @Comment({
             "this section controls how the mob prices work",
