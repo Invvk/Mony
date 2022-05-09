@@ -6,7 +6,9 @@ import io.github.invvk.mony.MonyLoader;
 import io.github.invvk.mony.config.properties.ConfigProperty;
 import io.github.invvk.mony.config.properties.bean.MobBean;
 import io.github.invvk.mony.config.properties.bean.MonyMob;
+import io.github.invvk.mony.hook.VaultHook;
 import io.github.invvk.mony.listener.MobKillListener;
+import io.github.invvk.mony.vault.TestEconomy;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -32,6 +34,7 @@ public class TestMobKillListener {
         server = MockBukkit.mock();
         plugin = MockBukkit.load(MonyLoader.class);
         listener = new MobKillListener(plugin.getBootstrap());
+        plugin.getBootstrap().setVault(new VaultHook(new TestEconomy()));
     }
 
     @AfterAll
@@ -59,25 +62,20 @@ public class TestMobKillListener {
     @Test
     public void checkOnKill() {
         final LivingEntity entity = Mockito.mock(LivingEntity.class);
+        final Player player = server.addPlayer();
+        final MobBean bean = plugin.getBootstrap().getConfigManager().getConfig().getProperty(ConfigProperty.MOB_PRICE);
+        final MonyMob expected = bean.getMob(EntityType.ZOMBIE);
+        final EntityDeathEvent deathEvent = new EntityDeathEvent(entity, Collections.emptyList());
 
         // when the method entity#getType() is called, Mockito will return EntityType.ZOMBIE
         // Because entity is being mocked with no actual data.
         Mockito.when(entity.getType()).thenReturn(EntityType.ZOMBIE);
 
-        final Player player = server.addPlayer();
         // make sure that when entity#getKiller() gets called, it references the newly created player
         Mockito.when(entity.getKiller()).thenReturn(player);
-
-        final MobBean bean = plugin.getBootstrap().getConfigManager().getConfig().getProperty(ConfigProperty.MOB_PRICE);
-
-        final EntityDeathEvent deathEvent = new EntityDeathEvent(entity, Collections.emptyList());
         listener.onKill(deathEvent);
 
-        final MonyMob actual = bean.getMob(EntityType.GIANT);
-        final MonyMob expected = bean.getMob(EntityType.ZOMBIE);
-
-        // the test environment code will put a GIANT with the expected mob price
-        assertEquals(expected.getPrice(), actual.getPrice());
+        assertEquals(expected.getPrice(), plugin.getBootstrap().getVault().getEconomy().getBalance(player));
     }
 
 }

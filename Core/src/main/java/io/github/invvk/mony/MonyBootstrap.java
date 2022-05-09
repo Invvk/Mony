@@ -1,11 +1,11 @@
 package io.github.invvk.mony;
 
 import io.github.invvk.mony.config.ConfigManager;
+import io.github.invvk.mony.database.StorageManager;
+import io.github.invvk.mony.database.UserManager;
 import io.github.invvk.mony.database.storage.IStorage;
 import io.github.invvk.mony.hook.VaultHook;
 import io.github.invvk.mony.listener.MobKillListener;
-import io.github.invvk.mony.database.StorageManager;
-import io.github.invvk.mony.database.UserManager;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.bstats.bukkit.Metrics;
@@ -18,7 +18,8 @@ public class MonyBootstrap implements Mony{
 
     private final MonyLoader loader;
 
-    @Getter private VaultHook vault;
+    @Getter
+    private VaultHook vault;
 
     @Getter private ConfigManager configManager;
 
@@ -76,4 +77,8 @@ public class MonyBootstrap implements Mony{
         // TODO: not sure what custom charts to add
     }
 
+    public void setVault(VaultHook vault) {
+        if (this.isTestEnvironment())
+            this.vault = vault;
+    }
 }
