@@ -6,7 +6,6 @@ import io.github.invvk.mony.config.properties.bean.MobBean;
 import io.github.invvk.mony.config.properties.bean.MonyMob;
 import io.github.invvk.mony.hook.VaultHook;
 import lombok.RequiredArgsConstructor;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -29,10 +28,6 @@ public class MobKillListener implements Listener {
         final MobBean bean = bootstrap.getConfigManager().getConfig().getProperty(ConfigProperty.MOB_PRICE);
         final MonyMob monyMob = bean.getMob(entity.getType());
         final VaultHook hook = this.bootstrap.getVault();
-
-        if (bootstrap.isTestEnvironment())
-            bean.getMobMap().put(EntityType.GIANT.name(),
-                    MonyMob.builder().price(monyMob.getPrice()).build());
 
         if (hook == null || monyMob.getPrice() < 0)
             return;
