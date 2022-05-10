@@ -17,9 +17,6 @@ public class MobBean {
     @Setter
     private double comboMultiplier = 1.2;
 
-    @Setter
-    private boolean disableComboGlobally = false;
-
     private final Map<String, MonyMob> custom_price = new HashMap<>();
 
     public MobBean() {
@@ -33,13 +30,8 @@ public class MobBean {
         if (bean == null)
             return MonyMob.builder()
                     .multiplier(this.comboMultiplier)
-                    .price(this.defaultPrice)
-                    .disableCombo(disableComboGlobally).build();
+                    .price(this.defaultPrice).build();
         return bean;
-    }
-
-    public boolean isComboDisabled() {
-        return this.disableComboGlobally;
     }
 
     public Map<String, MonyMob> getMobMap() {

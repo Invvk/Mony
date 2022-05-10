@@ -9,15 +9,12 @@ public class MonyMob {
     private double price;
     @Getter @Setter private double multiplier = 1.0;
 
-    @Setter private boolean disableCombo = false;
-
     public MonyMob() {
         // For configme bean mapper
     }
 
     public MonyMob(MonyMobBuilder builder) {
         this.price = builder.price;
-        this.disableCombo = builder.disableCombo;
         this.multiplier = builder.multiplier;
     }
 
@@ -25,17 +22,11 @@ public class MonyMob {
         return new MonyMobBuilder();
     }
 
-    public boolean isComboDisabled() {
-        return disableCombo;
-    }
-
     public static class MonyMobBuilder {
         private double price;
         private double multiplier;
-        private boolean disableCombo;
 
-        MonyMobBuilder() {
-        }
+        MonyMobBuilder() {}
 
         public MonyMobBuilder price(double price) {
             this.price = price;
@@ -47,17 +38,12 @@ public class MonyMob {
             return this;
         }
 
-        public MonyMobBuilder disableCombo(boolean disableCombo) {
-            this.disableCombo = disableCombo;
-            return this;
-        }
-
         public MonyMob build() {
             return new MonyMob(this);
         }
 
         public String toString() {
-            return "MonyMob.MonyMobBuilder(price=" + this.price + ", multiplier=" + this.multiplier + ", disableCombo=" + this.disableCombo + ")";
+            return "MonyMob.MonyMobBuilder(price=" + this.price + ", multiplier=" + this.multiplier + ")";
         }
     }
 }
