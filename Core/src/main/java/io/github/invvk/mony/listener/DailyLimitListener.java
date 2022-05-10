@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
 import java.util.Optional;
@@ -26,7 +27,7 @@ public class DailyLimitListener implements Listener {
             CacheBuilder.newBuilder().expireAfterAccess(8, TimeUnit.SECONDS)
                     .build();
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onMobKill(PlayerKillMobEvent event) throws ExecutionException {
         final Player player = event.getPlayer();
         final String uuid = player.getUniqueId().toString();
