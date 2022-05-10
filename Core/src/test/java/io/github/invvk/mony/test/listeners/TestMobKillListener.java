@@ -56,7 +56,6 @@ public class TestMobKillListener {
         final MonyMob bat = bean.getMob(EntityType.BAT);
         assertEquals(bat.getPrice(), bean.getDefaultPrice());
         assertEquals(bat.getMultiplier(), bean.getComboMultiplier());
-        assertEquals(bat.isComboDisabled(), bean.isComboDisabled());
     }
 
     @Test
