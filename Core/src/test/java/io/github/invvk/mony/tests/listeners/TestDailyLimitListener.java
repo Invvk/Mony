@@ -5,9 +5,7 @@ import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import io.github.invvk.mony.MonyLoader;
 import io.github.invvk.mony.events.PlayerKillMobEvent;
-import io.github.invvk.mony.hook.VaultHook;
 import io.github.invvk.mony.listener.DailyLimitListener;
-import io.github.invvk.mony.vault.TestEconomy;
 import org.bukkit.entity.Entity;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
@@ -28,9 +26,6 @@ public class TestDailyLimitListener {
         server = MockBukkit.mock();
         plugin = MockBukkit.load(MonyLoader.class);
         listener = new DailyLimitListener(plugin.getBootstrap());
-
-        // Dummy Vault Economy
-        plugin.getBootstrap().setVault(new VaultHook(new TestEconomy()));
     }
 
     @AfterAll
@@ -46,7 +41,7 @@ public class TestDailyLimitListener {
         final Entity entity = Mockito.mock(Entity.class);
 
         // Dummy PlayerKillMobEvent trigger.
-        final PlayerKillMobEvent event = new PlayerKillMobEvent(player, entity, 31);
+        final PlayerKillMobEvent event = new PlayerKillMobEvent(player, entity, 1200);
 
         // IMPORTANT: create the user so the user don't get ignored by the listener
         plugin.getBootstrap().getUserManager().createUser(player.getUniqueId(), player.getName());
@@ -60,7 +55,7 @@ public class TestDailyLimitListener {
 
         // The daily limit should only allow to give the correct amount
         // no matter what the original amount was.
-        Assertions.assertEquals(expected, plugin.getBootstrap().getVault().getEconomy().getBalance(player));
+        Assertions.assertEquals(expected, event.getAmount());
 
         // Check if the user was removed from the cache. prevent saving up unnecessary data in-memory.
         Assertions.assertNull(listener.getCache().getIfPresent(player.getName()));
