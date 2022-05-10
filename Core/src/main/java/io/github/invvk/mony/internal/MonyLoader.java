@@ -1,4 +1,4 @@
-package io.github.invvk.internal;
+package io.github.invvk.mony.internal;
 
 import lombok.Getter;
 import org.bukkit.plugin.PluginDescriptionFile;

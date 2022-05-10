@@ -1,6 +1,6 @@
-package io.github.invvk.internal.database.storage;
+package io.github.invvk.mony.internal.database.storage;
 
-import io.github.invvk.internal.database.manager.FileDataManager;
+import io.github.invvk.mony.internal.database.manager.FileDataManager;
 import io.github.invvk.mony.database.manager.IDataManager;
 import io.github.invvk.mony.database.storage.IStorage;
 import lombok.RequiredArgsConstructor;

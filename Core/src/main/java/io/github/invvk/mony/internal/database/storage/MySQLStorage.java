@@ -1,10 +1,10 @@
-package io.github.invvk.internal.database.storage;
+package io.github.invvk.mony.internal.database.storage;
 
 import ch.jalu.configme.SettingsManager;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import io.github.invvk.internal.MonyBootstrap;
-import io.github.invvk.internal.database.manager.MySQLDataManager;
+import io.github.invvk.mony.internal.MonyBootstrap;
+import io.github.invvk.mony.internal.database.manager.MySQLDataManager;
 import io.github.invvk.mony.config.properties.ConfigProperty;
 import io.github.invvk.mony.database.manager.IDataManager;
 import io.github.invvk.mony.database.storage.IStorage;

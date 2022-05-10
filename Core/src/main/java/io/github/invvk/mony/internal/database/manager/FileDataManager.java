@@ -1,4 +1,4 @@
-package io.github.invvk.internal.database.manager;
+package io.github.invvk.mony.internal.database.manager;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

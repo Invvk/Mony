@@ -1,8 +1,8 @@
-package io.github.invvk.internal.database;
+package io.github.invvk.mony.internal.database;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import io.github.invvk.internal.MonyLoader;
+import io.github.invvk.mony.internal.MonyLoader;
 import io.github.invvk.mony.config.properties.ConfigProperty;
 import io.github.invvk.mony.database.IUserManager;
 import io.github.invvk.mony.database.User;

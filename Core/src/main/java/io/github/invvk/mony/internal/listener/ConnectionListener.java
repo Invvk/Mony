@@ -1,6 +1,6 @@
-package io.github.invvk.internal.listener;
+package io.github.invvk.mony.internal.listener;
 
-import io.github.invvk.internal.MonyBootstrap;
+import io.github.invvk.mony.internal.MonyBootstrap;
 import io.github.invvk.mony.config.properties.ConfigProperty;
 import io.github.invvk.mony.database.User;
 import io.github.invvk.mony.events.MonyCacheLoadEvent;

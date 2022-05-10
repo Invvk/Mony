@@ -1,9 +1,9 @@
-package io.github.invvk.internal.database;
+package io.github.invvk.mony.internal.database;
 
-import io.github.invvk.internal.MonyBootstrap;
-import io.github.invvk.internal.database.storage.DummyStorage;
-import io.github.invvk.internal.database.storage.FileStorage;
-import io.github.invvk.internal.database.storage.MySQLStorage;
+import io.github.invvk.mony.internal.MonyBootstrap;
+import io.github.invvk.mony.internal.database.storage.DummyStorage;
+import io.github.invvk.mony.internal.database.storage.FileStorage;
+import io.github.invvk.mony.internal.database.storage.MySQLStorage;
 import io.github.invvk.mony.config.properties.ConfigProperty;
 import io.github.invvk.mony.database.manager.IDataManager;
 import io.github.invvk.mony.database.misc.StorageMode;

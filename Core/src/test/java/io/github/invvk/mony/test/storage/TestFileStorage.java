@@ -2,9 +2,9 @@ package io.github.invvk.mony.test.storage;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
-import io.github.invvk.internal.MonyLoader;
+import io.github.invvk.mony.internal.MonyLoader;
 import io.github.invvk.mony.database.User;
-import io.github.invvk.internal.database.manager.FileDataManager;
+import io.github.invvk.mony.internal.database.manager.FileDataManager;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;

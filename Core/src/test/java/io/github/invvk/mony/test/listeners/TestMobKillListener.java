@@ -2,12 +2,12 @@ package io.github.invvk.mony.test.listeners;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
-import io.github.invvk.internal.MonyLoader;
+import io.github.invvk.mony.internal.MonyLoader;
 import io.github.invvk.mony.config.properties.ConfigProperty;
 import io.github.invvk.mony.config.properties.bean.MobBean;
 import io.github.invvk.mony.config.properties.bean.MonyMob;
-import io.github.invvk.internal.hook.VaultHook;
-import io.github.invvk.internal.listener.MobKillListener;
+import io.github.invvk.mony.internal.hook.VaultHook;
+import io.github.invvk.mony.internal.listener.MobKillListener;
 import io.github.invvk.mony.test.TestEconomy;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;

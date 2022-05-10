@@ -1,4 +1,4 @@
-package io.github.invvk.internal.utils;
+package io.github.invvk.mony.internal.utils;
 
 import org.apache.commons.lang.StringUtils;
 

@@ -1,9 +1,9 @@
-package io.github.invvk.internal.listener;
+package io.github.invvk.mony.internal.listener;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import io.github.invvk.internal.MonyBootstrap;
-import io.github.invvk.internal.utils.TimeUtils;
+import io.github.invvk.mony.internal.MonyBootstrap;
+import io.github.invvk.mony.internal.utils.TimeUtils;
 import io.github.invvk.mony.config.properties.ConfigProperty;
 import io.github.invvk.mony.database.User;
 import io.github.invvk.mony.events.PlayerKillMobEvent;

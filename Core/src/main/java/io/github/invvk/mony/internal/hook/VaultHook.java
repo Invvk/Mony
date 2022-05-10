@@ -1,6 +1,6 @@
-package io.github.invvk.internal.hook;
+package io.github.invvk.mony.internal.hook;
 
-import io.github.invvk.internal.MonyLoader;
+import io.github.invvk.mony.internal.MonyLoader;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import net.milkbowl.vault.economy.Economy;

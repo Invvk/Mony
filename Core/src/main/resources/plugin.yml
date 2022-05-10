@@ -1,5 +1,5 @@
 name: Mony
 version: '${version}'
-main: io.github.invvk.mony.MonyLoader
+main: io.github.invvk.mony.internal.MonyLoader
 depend:
   - Vault

@@ -2,7 +2,7 @@ package io.github.invvk.mony.test.user;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
-import io.github.invvk.internal.MonyLoader;
+import io.github.invvk.mony.internal.MonyLoader;
 import io.github.invvk.mony.database.User;
 import org.junit.jupiter.api.*;
 

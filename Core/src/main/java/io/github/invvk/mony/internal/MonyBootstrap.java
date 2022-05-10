@@ -1,15 +1,15 @@
-package io.github.invvk.internal;
+package io.github.invvk.mony.internal;
 
-import io.github.invvk.internal.hook.placeholderapi.PlaceholderHook;
-import io.github.invvk.internal.listener.DailyLimitListener;
+import io.github.invvk.mony.internal.hook.placeholderapi.PlaceholderHook;
+import io.github.invvk.mony.internal.listener.DailyLimitListener;
 import io.github.invvk.mony.Mony;
 import io.github.invvk.mony.config.ConfigManager;
-import io.github.invvk.internal.database.StorageManager;
-import io.github.invvk.internal.database.UserManager;
+import io.github.invvk.mony.internal.database.StorageManager;
+import io.github.invvk.mony.internal.database.UserManager;
 import io.github.invvk.mony.database.storage.IStorage;
-import io.github.invvk.internal.hook.VaultHook;
-import io.github.invvk.internal.listener.ConnectionListener;
-import io.github.invvk.internal.listener.MobKillListener;
+import io.github.invvk.mony.internal.hook.VaultHook;
+import io.github.invvk.mony.internal.listener.ConnectionListener;
+import io.github.invvk.mony.internal.listener.MobKillListener;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.bstats.bukkit.Metrics;

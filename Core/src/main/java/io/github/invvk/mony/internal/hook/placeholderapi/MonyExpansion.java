@@ -1,7 +1,7 @@
-package io.github.invvk.internal.hook.placeholderapi;
+package io.github.invvk.mony.internal.hook.placeholderapi;
 
-import io.github.invvk.internal.MonyBootstrap;
-import io.github.invvk.internal.utils.TimeUtils;
+import io.github.invvk.mony.internal.MonyBootstrap;
+import io.github.invvk.mony.internal.utils.TimeUtils;
 import io.github.invvk.mony.database.User;
 import lombok.RequiredArgsConstructor;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
