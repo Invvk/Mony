@@ -1,6 +1,6 @@
-package io.github.invvk.mony.events;
+package io.github.invvk.mony.api.events;
 
-import io.github.invvk.mony.database.User;
+import io.github.invvk.mony.api.database.User;
 import lombok.Getter;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;

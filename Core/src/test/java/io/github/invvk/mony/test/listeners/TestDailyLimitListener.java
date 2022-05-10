@@ -4,7 +4,7 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import io.github.invvk.mony.internal.MonyLoader;
-import io.github.invvk.mony.events.PlayerKillMobEvent;
+import io.github.invvk.mony.api.events.PlayerKillMobEvent;
 import io.github.invvk.mony.internal.listener.DailyLimitListener;
 import org.bukkit.entity.Entity;
 import org.junit.jupiter.api.AfterAll;

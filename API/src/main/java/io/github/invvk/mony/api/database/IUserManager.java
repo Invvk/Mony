@@ -1,4 +1,4 @@
-package io.github.invvk.mony.database;
+package io.github.invvk.mony.api.database;
 
 import java.util.Optional;
 import java.util.UUID;

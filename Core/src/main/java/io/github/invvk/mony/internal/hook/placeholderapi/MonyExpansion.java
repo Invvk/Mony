@@ -2,7 +2,7 @@ package io.github.invvk.mony.internal.hook.placeholderapi;
 
 import io.github.invvk.mony.internal.MonyBootstrap;
 import io.github.invvk.mony.internal.utils.TimeUtils;
-import io.github.invvk.mony.database.User;
+import io.github.invvk.mony.api.database.User;
 import lombok.RequiredArgsConstructor;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;

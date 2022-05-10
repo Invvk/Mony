@@ -1,4 +1,4 @@
-package io.github.invvk.mony.events;
+package io.github.invvk.mony.api.events;
 
 import lombok.Getter;
 import lombok.Setter;

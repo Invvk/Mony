@@ -1,10 +1,10 @@
 package io.github.invvk.mony.internal.listener;
 
 import io.github.invvk.mony.internal.MonyBootstrap;
-import io.github.invvk.mony.config.properties.ConfigProperty;
-import io.github.invvk.mony.config.properties.bean.MobBean;
-import io.github.invvk.mony.config.properties.bean.MonyMob;
-import io.github.invvk.mony.events.PlayerKillMobEvent;
+import io.github.invvk.mony.api.config.properties.ConfigProperty;
+import io.github.invvk.mony.api.config.properties.bean.MobBean;
+import io.github.invvk.mony.api.config.properties.bean.MonyMob;
+import io.github.invvk.mony.api.events.PlayerKillMobEvent;
 import io.github.invvk.mony.internal.hook.VaultHook;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Bukkit;

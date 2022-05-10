@@ -1,7 +1,7 @@
 package io.github.invvk.mony.internal.database.manager;
 
-import io.github.invvk.mony.database.User;
-import io.github.invvk.mony.database.manager.IDataManager;
+import io.github.invvk.mony.api.database.User;
+import io.github.invvk.mony.api.database.manager.IDataManager;
 import io.github.invvk.mony.internal.database.storage.MySQLStorage;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

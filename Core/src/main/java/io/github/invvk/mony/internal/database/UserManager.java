@@ -3,10 +3,10 @@ package io.github.invvk.mony.internal.database;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import io.github.invvk.mony.internal.MonyLoader;
-import io.github.invvk.mony.config.properties.ConfigProperty;
-import io.github.invvk.mony.database.IUserManager;
-import io.github.invvk.mony.database.User;
-import io.github.invvk.mony.database.manager.IDataManager;
+import io.github.invvk.mony.api.config.properties.ConfigProperty;
+import io.github.invvk.mony.api.database.IUserManager;
+import io.github.invvk.mony.api.database.User;
+import io.github.invvk.mony.api.database.manager.IDataManager;
 import lombok.SneakyThrows;
 import org.bukkit.Bukkit;
 

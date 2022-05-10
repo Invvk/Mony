@@ -4,10 +4,10 @@ import io.github.invvk.mony.internal.MonyBootstrap;
 import io.github.invvk.mony.internal.database.storage.DummyStorage;
 import io.github.invvk.mony.internal.database.storage.FileStorage;
 import io.github.invvk.mony.internal.database.storage.MySQLStorage;
-import io.github.invvk.mony.config.properties.ConfigProperty;
-import io.github.invvk.mony.database.manager.IDataManager;
-import io.github.invvk.mony.database.misc.StorageMode;
-import io.github.invvk.mony.database.storage.IStorage;
+import io.github.invvk.mony.api.config.properties.ConfigProperty;
+import io.github.invvk.mony.api.database.manager.IDataManager;
+import io.github.invvk.mony.api.database.misc.StorageMode;
+import io.github.invvk.mony.api.database.storage.IStorage;
 import lombok.Getter;
 
 public class StorageManager {
