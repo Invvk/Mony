@@ -7,7 +7,7 @@ public interface IUserManager {
 
     Optional<User> getUser(UUID uuid);
 
-    void createUser(UUID uuid, String name);
+    User createUser(UUID uuid, String name);
 
     void invalidate(UUID uuid);
 

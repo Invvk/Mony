@@ -23,6 +23,8 @@ public class User {
     // cached from the pre login event
     private boolean existsInDB;
 
+    private double lastMaxAmount;
+
     /**
      * This method check if the player's username matches the saved username in the database.
      * @return whether the username matches db username
@@ -36,12 +38,17 @@ public class User {
      * @return whether the player has a cooldown or not.
      */
     public boolean hasCooldown() {
+        // This will check if the cooldown is indeed not 0 or less
         if (cooldown <= 0)
             return false;
 
-        final long current = System.currentTimeMillis();
-        final long value = cooldown - current;
-        return value > 0;
+        // This will get the difference between cooldown and current time millis then check if
+        // it is greater than 0, if true then the user is on cooldown.
+        return this.getCooldownDifference() > 0;
+    }
+
+    public long getCooldownDifference() {
+        return cooldown - System.currentTimeMillis();
     }
 
 }

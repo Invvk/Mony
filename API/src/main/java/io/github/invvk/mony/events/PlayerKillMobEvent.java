@@ -9,6 +9,12 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 
+/**
+ * Event before money gets deposited in the user account after killing a mob
+ *
+ * @since 1.0.0
+ * @apiNote This event is sync
+ */
 public class PlayerKillMobEvent extends PlayerEvent implements Cancellable {
 
     private static final HandlerList handlers = new HandlerList();
@@ -17,9 +23,9 @@ public class PlayerKillMobEvent extends PlayerEvent implements Cancellable {
 
     @Getter private final EntityType type;
 
-    @Getter @Setter private double amount;
+    @Setter private double amount;
 
-    @Getter private final double originalAmount;
+    private final double originalAmount;
 
     @Getter @Setter
     private boolean cancelled = false;
@@ -41,4 +47,21 @@ public class PlayerKillMobEvent extends PlayerEvent implements Cancellable {
         return handlers;
     }
 
+    /**
+     * Get the original amount of money to be given to the user
+     *
+     * @return original amount of money, constant value
+     */
+    public double getOriginalAmount() {
+        return originalAmount;
+    }
+
+    /**
+     * This represents the modifiable amount of money <br>
+     * This will be given to the user.
+     * @return modified amount of money
+     */
+    public double getAmount() {
+        return amount;
+    }
 }
