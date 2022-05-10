@@ -1,6 +1,6 @@
 package io.github.invvk.mony.database;
 
-import io.github.invvk.mony.MonyLoader;
+import io.github.invvk.mony.MonyBootstrap;
 import io.github.invvk.mony.config.properties.ConfigProperty;
 import io.github.invvk.mony.database.manager.IDataManager;
 import io.github.invvk.mony.database.misc.StorageMode;
@@ -12,27 +12,31 @@ import lombok.Getter;
 
 public class StorageManager {
 
-    private final MonyLoader plugin;
+    private final MonyBootstrap bootstrap;
 
     private final StorageMode mode;
 
     @Getter private IStorage storage;
 
-    public StorageManager(MonyLoader bootstrap) {
-        this.plugin = bootstrap;
+    public StorageManager(MonyBootstrap bootstrap) {
+        this.bootstrap = bootstrap;
 
-        mode = this.plugin.getBootstrap().getConfigManager().getConfig().getProperty(ConfigProperty.STORAGE_MODE)
+        mode = this.bootstrap.getConfigManager().getConfig().getProperty(ConfigProperty.STORAGE_MODE)
                 .equalsIgnoreCase("MYSQL") ? StorageMode.MYSQL : StorageMode.FILE;
         init();
     }
 
     private void init() {
-        if (this.plugin.isTestEnvironment()) {
-            this.storage = new DummyStorage(this.plugin.getDataFolder());
+        if (this.bootstrap.isTestEnvironment()) {
+            this.storage = new DummyStorage(this.bootstrap.getDataFolder());
             return;
         }
 
-        this.storage = (mode == StorageMode.MYSQL) ? new MySQLStorage(this.plugin) : new FileStorage(this.plugin.getDataFolder());
+        if (!bootstrap.getConfigManager().getConfig().getProperty(ConfigProperty.DAILY_LIMIT_ENABLE))
+            return;
+
+        this.storage = (mode == StorageMode.MYSQL) ? new MySQLStorage(this.bootstrap) : new FileStorage(this.bootstrap.getDataFolder());
+        this.storage.init();
     }
 
     public void close() {

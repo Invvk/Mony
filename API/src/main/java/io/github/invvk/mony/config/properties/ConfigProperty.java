@@ -2,10 +2,7 @@ package io.github.invvk.mony.config.properties;
 
 import ch.jalu.configme.Comment;
 import ch.jalu.configme.SettingsHolder;
-import ch.jalu.configme.properties.BeanProperty;
-import ch.jalu.configme.properties.IntegerProperty;
-import ch.jalu.configme.properties.Property;
-import ch.jalu.configme.properties.StringProperty;
+import ch.jalu.configme.properties.*;
 import io.github.invvk.mony.config.properties.bean.MobBean;
 
 public class ConfigProperty implements SettingsHolder {
@@ -32,15 +29,22 @@ public class ConfigProperty implements SettingsHolder {
     public static Property<String> STORAGE_TABLE_PREFIX = new StringProperty
             ("storage.mysql.table-prefix", "mony_");
 
-    @Comment({"the updater is in minutes, example: 30 = 30 minutes",
+    @Comment({"Data save task is in minutes, example: 30 = 30 minutes",
+            "meaning, a task will run every x minutes to save the current player cache",
             "Note: settings apply every reboot, PLEASE DO NOT USE /reload"})
     public static Property<Integer> UPDATE_INTERVAL = new IntegerProperty(
             "Settings.data-update-interval", 30);
 
+    @Comment({"Should we enable the daily limit?", "if no, then the plugin will stop saving data."})
+    public static Property<Boolean> DAILY_LIMIT_ENABLE =
+            new BooleanProperty("settings.daily-limit.enable", true);
+
+    @Comment("Cooldown for the daily limit.")
     public static Property<String> DAILY_LIMIT_COOLDOWN
             = new StringProperty("settings.daily-limit.cooldown",
             "8h");
 
+    @Comment("max amount of money to be given in the daily limit.")
     public static Property<Integer> DAILY_LIMIT_MAX_AMOUNT
             = new IntegerProperty("settings.daily-limit.max-amount",
             1000);

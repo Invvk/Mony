@@ -14,6 +14,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.ServicePriority;
 
+import java.io.File;
+import java.util.logging.Logger;
+
 @RequiredArgsConstructor
 public class MonyBootstrap implements Mony{
 
@@ -29,8 +32,8 @@ public class MonyBootstrap implements Mony{
     @Getter private StorageManager storageManager;
 
     private void initial() {
-        this.configManager = new ConfigManager(this.loader.getDataFolder());
-        this.storageManager = new StorageManager(this.loader);
+        this.configManager = new ConfigManager(getDataFolder());
+        this.storageManager = new StorageManager(this);
         this.userManager = new UserManager(this.loader);
     }
 
@@ -78,8 +81,19 @@ public class MonyBootstrap implements Mony{
         // TODO: not sure what custom charts to add
     }
 
+    /**
+     * INTERNAL METHOD, ONLY FOR TEST PURPOSES
+     */
     public void setVault(VaultHook vault) {
         if (this.isTestEnvironment())
             this.vault = vault;
+    }
+
+    public File getDataFolder() {
+        return this.loader.getDataFolder();
+    }
+
+    public Logger getLogger() {
+        return this.loader.getLogger();
     }
 }
