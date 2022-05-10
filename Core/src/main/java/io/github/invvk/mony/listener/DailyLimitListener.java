@@ -29,6 +29,9 @@ public class DailyLimitListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onMobKill(PlayerKillMobEvent event) throws ExecutionException {
+        if (!bootstrap.getConfigManager().getConfig().getProperty(ConfigProperty.DAILY_LIMIT_ENABLE))
+            return;
+
         final Player player = event.getPlayer();
         final String uuid = player.getUniqueId().toString();
 
@@ -58,7 +61,7 @@ public class DailyLimitListener implements Listener {
             // replace with the new amount
             cache.put(uuid, difference);
 
-        bootstrap.getVault().getEconomy().depositPlayer(player, expectedAmount);
+        event.setAmount(expectedAmount);
     }
 
 }
