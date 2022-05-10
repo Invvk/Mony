@@ -3,7 +3,7 @@ package io.github.invvk.mony.database.storage;
 import ch.jalu.configme.SettingsManager;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import io.github.invvk.mony.MonyLoader;
+import io.github.invvk.mony.MonyBootstrap;
 import io.github.invvk.mony.config.properties.ConfigProperty;
 import io.github.invvk.mony.database.manager.IDataManager;
 import io.github.invvk.mony.database.manager.MySQLDataManager;
@@ -19,7 +19,7 @@ import java.util.logging.Level;
 @RequiredArgsConstructor
 public class MySQLStorage implements IStorage {
 
-    private final MonyLoader loader;
+    private final MonyBootstrap bootstrap;
 
     @Getter private String tablePrefix;
 
@@ -34,8 +34,7 @@ public class MySQLStorage implements IStorage {
 
     @Override
     public void init() {
-        final SettingsManager cnfg = loader.getBootstrap().getConfigManager()
-                .getConfig();
+        final SettingsManager cnfg = bootstrap.getConfigManager().getConfig();
 
         String mode = cnfg.getProperty(ConfigProperty.STORAGE_MODE);
 
@@ -82,7 +81,7 @@ public class MySQLStorage implements IStorage {
                      String.format("CREATE TABLE IF NOT EXISTS %s(uuid VARCHAR(36) NOT NULL, name VARCHAR(16) NOT NULL, cooldown BIGINT)", this.pdTable))) {
             st.executeUpdate();
         } catch (SQLException e) {
-            loader.getLogger().log(Level.SEVERE, "Failed to create table", e);
+            bootstrap.getLogger().log(Level.SEVERE, "Failed to create table", e);
         }
     }
 
