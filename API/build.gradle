@@ -1,5 +1,7 @@
 plugins {
     id 'java-library'
+    id 'signing'
+    id 'maven-publish'
 }
 
 group 'io.github.invvk'
@@ -7,4 +9,48 @@ version '1.0'
 
 dependencies {
     api 'ch.jalu:configme:1.3.0'
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'io.github.invvk'
+            artifactId = 'mony-api'
+            from(components.java)
+            pom {
+                name = 'Mony-API'
+                description = 'Public API for mony plugin.'
+                url = 'https://github.com/invvk/mony'
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'Invvk'
+                        name = 'Invvk'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/invvk/mony'
+                    connection = 'scm:git://github.com/invvk/mony.git'
+                    developerConnection = 'scm:git://github.com/invvk/mony.git'
+                }
+            }
+        }
+    }
+}
+
+signing {
+    def signingKey = findProperty("signingKey")
+    def signingPassword = findProperty("signingPassword")
+    useInMemoryPgpKeys(signingKey, signingPassword)
+    sign publishing.publications.mavenJava
 }
