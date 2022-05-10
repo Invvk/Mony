@@ -34,7 +34,6 @@ public class MobKillListener implements Listener {
         if (hook == null || monyMob.getPrice() < 0)
             return;
 
-
         final PlayerKillMobEvent customEvent = new PlayerKillMobEvent(killer, entity, monyMob.getPrice());
 
         Bukkit.getPluginManager().callEvent(customEvent);
