@@ -10,10 +10,10 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 
 /**
- * Event before money gets deposited in the user account after killing a mob
+ * Event before money gets deposited in the user account after killing a mob <br> <br>
+ * <strong>THIS EVENT IS SYNC</strong>
  *
  * @since 1.0.0
- * @apiNote This event is sync
  */
 public class PlayerKillMobEvent extends PlayerEvent implements Cancellable {
 

@@ -10,10 +10,10 @@ import java.util.UUID;
 
 /**
  * Async Event called when the user cache gets loaded from {@link AsyncPlayerPreLoginEvent}
- * <br>this event adds {@code MonyCacheLoadEvent.getLoadedUser()}
+ * <br>this event adds {@code MonyCacheLoadEvent.getLoadedUser()} <br> <br>
+ * <strong>THIS EVENT IS ASYNC</strong>
  *
  * @since 1.0.0
- * @apiNote This event is Async
  * @author Invvk
  */
 public class MonyCacheLoadEvent extends Event {
