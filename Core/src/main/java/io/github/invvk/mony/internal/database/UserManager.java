@@ -23,7 +23,7 @@ public class UserManager implements IUserManager {
     public UserManager(MonyLoader loader) {
         this.dataManager = loader.getBootstrap().getStorageManager().getDataManager();
         long updateInterval = loader.getBootstrap().getConfigManager().getConfig().
-                getProperty(ConfigProperty.UPDATE_INTERVAL);
+                getProperty(ConfigProperty.UPDATE_INTERVAL) * 20 * 60;
         Bukkit.getScheduler().runTaskTimerAsynchronously(loader, () -> usersCache.asMap()
                         .forEach((uuid, user) -> dataManager.saveUser(user))
                 ,updateInterval, updateInterval);
