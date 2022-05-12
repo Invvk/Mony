@@ -1,5 +1,7 @@
 package io.github.invvk.mony.internal.utils;
 
+import org.bukkit.ChatColor;
+
 import java.util.regex.Pattern;
 
 public class Utils {
@@ -16,6 +18,10 @@ public class Utils {
 
     public static boolean containsSpecialChar(String input) {
         return specialChar.matcher(input).find();
+    }
+
+    public static String color(String message) {
+        return ChatColor.translateAlternateColorCodes('&', message);
     }
 
 }
