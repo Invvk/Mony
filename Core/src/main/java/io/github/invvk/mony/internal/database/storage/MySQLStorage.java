@@ -48,7 +48,10 @@ public class MySQLStorage implements IStorage {
         HikariConfig config = new HikariConfig();
 
         config.setPoolName("Mony-Pool");
-        config.setDataSourceClassName("com.mysql.cj.jdbc.MysqlDataSource");
+        config.setJdbcUrl("jdbc:mysql://" + cnfg.getProperty(ConfigProperty.STORAGE_HOST) + ":"
+                + cnfg.getProperty(ConfigProperty.STORAGE_PORT) + "/" + cnfg.getProperty(ConfigProperty.STORAGE_DATABASE));
+        config.setUsername(cnfg.getProperty(ConfigProperty.STORAGE_USER));
+        config.setPassword(cnfg.getProperty(ConfigProperty.STORAGE_PASSWORD));
         config.setIdleTimeout(10000);
         config.setMaxLifetime(60000);
         config.setMinimumIdle(1);
@@ -57,12 +60,6 @@ public class MySQLStorage implements IStorage {
         config.addDataSourceProperty("prepStmtCacheSqlLimit", 2048);
 
         final Properties properties = new Properties();
-
-        properties.put("serverName", cnfg.getProperty(ConfigProperty.STORAGE_HOST));
-        properties.put("port", cnfg.getProperty(ConfigProperty.STORAGE_PORT));
-        properties.put("user", cnfg.getProperty(ConfigProperty.STORAGE_USER));
-        properties.put("password", cnfg.getProperty(ConfigProperty.STORAGE_PASSWORD));
-        properties.put("databaseName", cnfg.getProperty(ConfigProperty.STORAGE_DATABASE));
         properties.putIfAbsent("serverTimezone", "UTC");
 
         config.setDataSourceProperties(properties);
@@ -79,7 +76,7 @@ public class MySQLStorage implements IStorage {
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement st = connection.prepareStatement(
-                     String.format("CREATE TABLE IF NOT EXISTS %s(uuid VARCHAR(36) NOT NULL, name VARCHAR(16) NOT NULL, cooldown BIGINT)", this.pdTable))) {
+                     String.format("CREATE TABLE IF NOT EXISTS %s(uuid VARCHAR(36) NOT NULL, name VARCHAR(16) NOT NULL, cooldown BIGINT, PRIMARY KEY (uuid, name), UNIQUE (uuid), UNIQUE(name))", this.pdTable))) {
             st.executeUpdate();
         } catch (SQLException e) {
             bootstrap.getLogger().log(Level.SEVERE, "Failed to create table", e);

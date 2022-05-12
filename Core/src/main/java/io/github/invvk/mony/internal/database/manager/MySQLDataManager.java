@@ -16,10 +16,8 @@ public class MySQLDataManager implements IDataManager {
 
     private final MySQLStorage storage;
 
-    private static final String PLAYER_SELECT = "SELECT name,cooldown FROM '%s' WHERE uuid=?";
-    private static final String PLAYER_INSERT_SAVE = "INSERT INTO '%s'(uuid,name,cooldown) VALUES(?,?,?)";
-    private static final String PLAYER_UPDATE_SAVE = "UPDATE '%s' SET cooldown=? WHERE uuid=?";
-    private static final String PLAYER_UPDATE_SAVE_USERNAME = "UPDATE '%s' SET cooldown=?,name=? WHERE uuid=?";
+    private static final String PLAYER_SELECT = "SELECT DISTINCT `name`,`cooldown` FROM %s WHERE uuid=?";
+    private static final String PLAYER_SAVE = "INSERT INTO %s (uuid,name,cooldown) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE `name`=?, `cooldown`=?";
 
     @SneakyThrows
     public User getUserFromDatabase(UUID uuid, String name) {
@@ -48,45 +46,16 @@ public class MySQLDataManager implements IDataManager {
 
     @SneakyThrows
     public void saveUser(User user) {
-        try (final Connection connection = storage.getConnection()) {
-             if (user.isExistsInDB()) {
-                 if (user.nameMatchesDB()) updateCooldown(connection, user);
-                  else updateCooldownAndName(connection, user);
-             } else {
-                 insert(connection, user);
-             }
-        }
-    }
-
-    @SneakyThrows
-    public void insert(Connection connection, User user) {
-        try (final PreparedStatement st = connection.prepareStatement(String.format(PLAYER_INSERT_SAVE, storage.getPdTable()))) {
+        try (final Connection connection = storage.getConnection();
+        PreparedStatement st = connection.prepareStatement(String.format(PLAYER_SAVE, storage.getPdTable()))) {
             st.setString(1, user.getUniqueId().toString());
             st.setString(2, user.getName());
             st.setLong(3, user.getCooldown());
+            st.setString(4, user.getName());
+            st.setLong(5, user.getCooldown());
             st.executeUpdate();
         }
-    }
 
-    @SneakyThrows
-    private void updateCooldown(Connection connection, User user) {
-        try (final PreparedStatement st = connection.prepareStatement(String.format(PLAYER_UPDATE_SAVE,
-                storage.getPdTable()))) {
-            st.setLong(1, user.getCooldown());
-            st.setString(2, user.getUniqueId().toString());
-            st.executeUpdate();
-        }
-    }
-
-    @SneakyThrows
-    private void updateCooldownAndName(Connection connection, User user) {
-        try (final PreparedStatement st = connection.prepareStatement(String.format(PLAYER_UPDATE_SAVE_USERNAME,
-                storage.getPdTable()))) {
-            st.setLong(1, user.getCooldown());
-            st.setString(2, user.getName());
-            st.setString(3, user.getUniqueId().toString());
-            st.executeUpdate();
-        }
     }
 
 }
