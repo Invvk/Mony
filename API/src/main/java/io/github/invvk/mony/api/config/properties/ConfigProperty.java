@@ -27,7 +27,7 @@ public class ConfigProperty implements SettingsHolder {
             ("storage.mysql.database", "database");
 
     public static Property<String> STORAGE_TABLE_PREFIX = new StringProperty
-            ("storage.mysql.table-prefix", "mony_");
+            ("storage.mysql.table-prefix", "mony");
 
     @Comment({"Data save task is in minutes, example: 30 = 30 minutes",
             "meaning, a task will run every x minutes to save the current player cache",
