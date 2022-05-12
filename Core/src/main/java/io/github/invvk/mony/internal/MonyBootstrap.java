@@ -23,6 +23,10 @@ import java.io.File;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+/**
+ * INTERAL CLASS, NOT MEANT FOR PUBLIC USE
+ * @see io.github.invvk.mony.api.Mony
+ */
 @RequiredArgsConstructor
 public class MonyBootstrap implements Mony {
 
@@ -111,9 +115,6 @@ public class MonyBootstrap implements Mony {
         new PlaceholderHook(this).init();
     }
 
-    /**
-     * INTERNAL METHOD, ONLY FOR TEST PURPOSES
-     */
     public void setVault(VaultHook vault) {
         if (this.isTestEnvironment())
             this.vault = vault;
