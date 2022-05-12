@@ -51,9 +51,13 @@ public class MonyBootstrap implements Mony {
 
         this.vault = new VaultHook(this.loader);
 
-        this.registerListeners(new MobKillListener(this),
-                new DailyLimitListener(this),
-                new ConnectionListener(this));
+        // only register these listeners if the daily limit is enabled
+        // otherwise these events will be rendered useless.
+        if (this.isDailyLimitEnabled())
+            this.registerListeners(new DailyLimitListener(this),
+                    new ConnectionListener(this));
+
+        this.registerListeners(new MobKillListener(this));
 
         this.enableMetrics();
         this.handleSoftDepends();

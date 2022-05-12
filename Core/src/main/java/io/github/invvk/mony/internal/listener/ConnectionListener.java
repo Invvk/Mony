@@ -24,7 +24,7 @@ public class ConnectionListener implements Listener {
 
     @EventHandler
     public void onJoin(AsyncPlayerPreLoginEvent event) {
-        if (!bootstrap.getConfigManager().getConfig().getProperty(ConfigProperty.DAILY_LIMIT_ENABLE))
+        if (!bootstrap.isDailyLimitEnabled())
             return;
 
         final UUID uuid = event.getUniqueId();

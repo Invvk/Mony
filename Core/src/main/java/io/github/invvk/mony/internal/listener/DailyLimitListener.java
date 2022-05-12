@@ -40,7 +40,7 @@ public class DailyLimitListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onMobKill(PlayerKillMobEvent event) throws ExecutionException {
-        if (!bootstrap.getConfigManager().getConfig().getProperty(ConfigProperty.DAILY_LIMIT_ENABLE))
+        if (!bootstrap.isDailyLimitEnabled())
             return;
 
         final IUserManager userManager = bootstrap.getUserManager().orElse(null);
@@ -87,10 +87,6 @@ public class DailyLimitListener implements Listener {
             cache.put(uuid, difference);
             user.setLastMaxAmount(difference);
         }
-        ActionbarUtils.sendActionBar(player, Utils.color(bootstrap.getConfigManager()
-                .getMessage().getProperty(MessagesProperty.MOB_KILL_ACTIONBAR).replace("{AMOUNT}",
-                        String.valueOf(expectedAmount)).replace("{MOB}", StringUtils.
-                        capitalize(event.getType().name().toLowerCase().replace("_", " ")))));
         event.setAmount(expectedAmount);
     }
 
