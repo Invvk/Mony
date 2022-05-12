@@ -75,7 +75,7 @@ body:
     attributes:
       label: Mony version
       description: What version of Mony are you running? (`/version Mony`)
-      placeholder: "For example: WGEF-REBORN version 1.0+abce456"
+      placeholder: "For example: Mony version 1.0+abce456"
     validations:
       required: true
 
