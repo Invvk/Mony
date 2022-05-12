@@ -1,5 +1,7 @@
 package io.github.invvk.mony.internal;
 
+import io.github.invvk.mony.api.config.properties.ConfigProperty;
+import io.github.invvk.mony.api.database.IUserManager;
 import io.github.invvk.mony.internal.hook.placeholderapi.PlaceholderHook;
 import io.github.invvk.mony.internal.listener.DailyLimitListener;
 import io.github.invvk.mony.api.Mony;
@@ -18,6 +20,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.ServicePriority;
 
 import java.io.File;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 @RequiredArgsConstructor
@@ -30,14 +33,16 @@ public class MonyBootstrap implements Mony {
 
     @Getter private ConfigManager configManager;
 
-    @Getter private UserManager userManager;
+    private UserManager userManager;
 
     @Getter private StorageManager storageManager;
 
     private void initial() {
         this.configManager = new ConfigManager(getDataFolder());
         this.storageManager = new StorageManager(this);
-        this.userManager = new UserManager(this.loader);
+
+        if (this.isDailyLimitEnabled())
+            this.userManager = new UserManager(this.loader);
     }
 
     public void enable() {
@@ -55,18 +60,28 @@ public class MonyBootstrap implements Mony {
     }
 
     public void disable() {
-        this.getUserManager().invalidateAll();
+        this.getUserManager().ifPresent(IUserManager::invalidateAll);
         storageManager.close();
     }
 
     @Override
-    public IStorage getStorage() {
-        return this.storageManager.getStorage();
+    public Optional<IStorage> getStorage() {
+        return Optional.ofNullable(this.storageManager.getStorage());
+    }
+
+    @Override
+    public Optional<IUserManager> getUserManager() {
+        return Optional.ofNullable(this.userManager);
     }
 
     @Override
     public boolean isTestEnvironment() {
         return this.loader.isTestEnvironment();
+    }
+
+    @Override
+    public boolean isDailyLimitEnabled() {
+        return configManager.getConfig().getProperty(ConfigProperty.DAILY_LIMIT_ENABLE);
     }
 
     @Override

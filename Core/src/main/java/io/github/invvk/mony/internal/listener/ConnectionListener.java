@@ -30,7 +30,9 @@ public class ConnectionListener implements Listener {
         final UUID uuid = event.getUniqueId();
         final String name = event.getName();
 
-        final User user = this.bootstrap.getUserManager().createUser(uuid, name);
+        final User user = this.bootstrap.getUserManager().map(userManager -> userManager.createUser(uuid, name)).orElse(null);
+        if (user == null)
+            return;
         Bukkit.getPluginManager().callEvent(new MonyCacheLoadEvent(event.getUniqueId(), event.getName(), user));
     }
 
@@ -40,7 +42,7 @@ public class ConnectionListener implements Listener {
             return;
 
         executor.execute(() -> bootstrap.getUserManager().
-                invalidate(event.getPlayer().getUniqueId()));
+                ifPresent(userManager -> userManager.invalidate(event.getPlayer().getUniqueId())));
     }
 
 }
