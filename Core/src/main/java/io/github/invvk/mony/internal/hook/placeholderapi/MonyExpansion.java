@@ -3,7 +3,7 @@ package io.github.invvk.mony.internal.hook.placeholderapi;
 import io.github.invvk.mony.api.database.IUserManager;
 import io.github.invvk.mony.api.database.User;
 import io.github.invvk.mony.internal.MonyBootstrap;
-import io.github.invvk.mony.internal.utils.TimeUtils;
+import io.github.invvk.mony.api.utils.TimeUtils;
 import lombok.RequiredArgsConstructor;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
@@ -59,7 +59,7 @@ public class MonyExpansion extends PlaceholderExpansion {
         if (params.equalsIgnoreCase("dl_cooldown"))
             return userManager.getUser(player.getUniqueId())
                     .map(user -> user.hasCooldown()
-                            ? TimeUtils.translateTime(user.getCooldownDifference())
+                            ? user.getFormattedCooldown()
                             : "none").orElse(null);
 
 

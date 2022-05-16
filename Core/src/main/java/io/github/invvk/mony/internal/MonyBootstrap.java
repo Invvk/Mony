@@ -1,11 +1,11 @@
 package io.github.invvk.mony.internal;
 
-import io.github.invvk.mony.api.config.properties.ConfigProperty;
+import io.github.invvk.mony.internal.config.properties.ConfigProperty;
 import io.github.invvk.mony.api.database.IUserManager;
 import io.github.invvk.mony.internal.hook.placeholderapi.PlaceholderHook;
 import io.github.invvk.mony.internal.listener.DailyLimitListener;
 import io.github.invvk.mony.api.Mony;
-import io.github.invvk.mony.api.config.ConfigManager;
+import io.github.invvk.mony.internal.config.ConfigManager;
 import io.github.invvk.mony.internal.database.StorageManager;
 import io.github.invvk.mony.internal.database.UserManager;
 import io.github.invvk.mony.api.database.storage.IStorage;
