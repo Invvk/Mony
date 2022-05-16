@@ -69,7 +69,8 @@ public class MonyBootstrap implements Mony {
 
     public void disable() {
         this.getUserManager().ifPresent(IUserManager::invalidateAll);
-        storageManager.close();
+        if (storageManager != null && this.getStorage().isPresent())
+            storageManager.close();
     }
 
     @Override
