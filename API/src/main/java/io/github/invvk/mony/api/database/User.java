@@ -17,21 +17,11 @@ public class User {
     @Expose
     private long cooldown;
 
-    // should be used in queries, not 'name'
-    private String dbName;
-
     // cached from the pre login event
     private boolean existsInDB;
 
+    @Expose
     private double lastMaxAmount;
-
-    /**
-     * This method check if the player's username matches the saved username in the database.
-     * @return whether the username matches db username
-     */
-    public boolean nameMatchesDB() {
-        return name.equalsIgnoreCase(dbName);
-    }
 
     /**
      * check if the player has any active cooldown

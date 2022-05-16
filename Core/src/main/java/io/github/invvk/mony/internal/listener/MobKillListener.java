@@ -1,13 +1,13 @@
 package io.github.invvk.mony.internal.listener;
 
-import io.github.invvk.mony.api.config.properties.MessagesProperty;
-import io.github.invvk.mony.internal.MonyBootstrap;
+import io.github.invvk.actionbar.api.ActionBarAPI;
 import io.github.invvk.mony.api.config.properties.ConfigProperty;
+import io.github.invvk.mony.api.config.properties.MessagesProperty;
 import io.github.invvk.mony.api.config.properties.bean.MobBean;
 import io.github.invvk.mony.api.config.properties.bean.MonyMob;
 import io.github.invvk.mony.api.events.PlayerKillMobEvent;
+import io.github.invvk.mony.internal.MonyBootstrap;
 import io.github.invvk.mony.internal.hook.VaultHook;
-import io.github.invvk.mony.internal.utils.ActionbarUtils;
 import io.github.invvk.mony.internal.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
@@ -53,11 +53,10 @@ public class MobKillListener implements Listener {
 
         hook.getEconomy().depositPlayer(killer, toDeposit);
 
-        ActionbarUtils.sendActionBar(killer, Utils.color(bootstrap.getConfigManager()
+        ActionBarAPI.send(killer, Utils.color(bootstrap.getConfigManager()
                 .getMessage().getProperty(MessagesProperty.MOB_KILL_ACTIONBAR).replace("{AMOUNT}",
                         String.valueOf(toDeposit)).replace("{MOB}", StringUtils.
                         capitalize(entity.getType().name().toLowerCase().replace("_", " ")))));
-
     }
 
 }

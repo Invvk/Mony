@@ -76,7 +76,7 @@ public class MySQLStorage implements IStorage {
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement st = connection.prepareStatement(
-                     String.format("CREATE TABLE IF NOT EXISTS %s(uuid VARCHAR(36) NOT NULL, name VARCHAR(16) NOT NULL, cooldown BIGINT, PRIMARY KEY (uuid, name), UNIQUE (uuid), UNIQUE(name))", this.pdTable))) {
+                     String.format("CREATE TABLE IF NOT EXISTS %s(uuid VARCHAR(36) NOT NULL, name VARCHAR(16) NOT NULL, cooldown BIGINT, amountLeft DOUBLE, PRIMARY KEY (uuid, name), UNIQUE (uuid), UNIQUE(name))", this.pdTable))) {
             st.executeUpdate();
         } catch (SQLException e) {
             bootstrap.getLogger().log(Level.SEVERE, "Failed to create table", e);

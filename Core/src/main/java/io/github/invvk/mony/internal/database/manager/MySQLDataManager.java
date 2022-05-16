@@ -16,13 +16,12 @@ public class MySQLDataManager implements IDataManager {
 
     private final MySQLStorage storage;
 
-    private static final String PLAYER_SELECT = "SELECT DISTINCT `name`,`cooldown` FROM %s WHERE uuid=?";
-    private static final String PLAYER_SAVE = "INSERT INTO %s (uuid,name,cooldown) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE `name`=?, `cooldown`=?";
+    private static final String PLAYER_SELECT = "SELECT DISTINCT `name`,`cooldown`,`amountLeft` FROM %s WHERE uuid=?";
+    private static final String PLAYER_SAVE = "INSERT INTO %s (uuid,name,cooldown,amountLeft) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE `name`=?, `cooldown`=?, `amountLeft`=?";
 
     @SneakyThrows
     public User getUserFromDatabase(UUID uuid, String name) {
         final User user = new User(uuid, name);
-        user.setDbName(name);
         user.setExistsInDB(false);
 
         try (final Connection connection = storage.getConnection();
@@ -33,11 +32,7 @@ public class MySQLDataManager implements IDataManager {
                 if (rs.next()) {
                     user.setExistsInDB(true);
                     user.setCooldown(rs.getLong(2));
-
-                    // DbName will be used in queries, this adds support for premium account username change.
-                    final String selectedName = rs.getString(1);
-                    if (!selectedName.equalsIgnoreCase(name))
-                        user.setDbName(selectedName);
+                    user.setLastMaxAmount(rs.getDouble(3));
                 }
             }
         }
@@ -51,8 +46,10 @@ public class MySQLDataManager implements IDataManager {
             st.setString(1, user.getUniqueId().toString());
             st.setString(2, user.getName());
             st.setLong(3, user.getCooldown());
-            st.setString(4, user.getName());
-            st.setLong(5, user.getCooldown());
+            st.setDouble(4, user.getLastMaxAmount());
+            st.setString(5, user.getName());
+            st.setLong(6, user.getCooldown());
+            st.setDouble(7, user.getLastMaxAmount());
             st.executeUpdate();
         }
 

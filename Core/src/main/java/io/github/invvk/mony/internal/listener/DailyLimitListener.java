@@ -27,19 +27,12 @@ public class DailyLimitListener implements Listener {
 
     private final MonyBootstrap bootstrap;
 
-    @Getter private final Cache<String, Double> cache;
-
     public DailyLimitListener(MonyBootstrap bootstrap) {
         this.bootstrap = bootstrap;
-        this.cache =
-        CacheBuilder.newBuilder().expireAfterAccess(TimeUtils.getTimeInSeconds
-                        (bootstrap.getConfigManager().getConfig().
-                                getProperty(ConfigProperty.DAILY_LIMIT_COOLDOWN)), TimeUnit.HOURS)
-                .build();
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onMobKill(PlayerKillMobEvent event) throws ExecutionException {
+    public void onMobKill(PlayerKillMobEvent event) {
         if (!bootstrap.isDailyLimitEnabled())
             return;
 
@@ -61,9 +54,12 @@ public class DailyLimitListener implements Listener {
             return;
         }
 
-        double current = cache.get(uuid, () ->
-                bootstrap.getConfigManager()
-                         .getConfig().getProperty(ConfigProperty.DAILY_LIMIT_MAX_AMOUNT).doubleValue());
+        if (user.getLastMaxAmount() == 0) {
+            user.setLastMaxAmount(bootstrap.getConfigManager().getConfig().getProperty(ConfigProperty
+                    .DAILY_LIMIT_MAX_AMOUNT));
+        }
+
+        double current = user.getLastMaxAmount();
 
         if (current == 0) {
             event.setCancelled(true);
@@ -76,7 +72,6 @@ public class DailyLimitListener implements Listener {
             expectedAmount = current;
             user.setCooldown(System.currentTimeMillis() + TimeUtils.getTimeInMilli(bootstrap.getConfigManager().getConfig().
                     getProperty(ConfigProperty.DAILY_LIMIT_COOLDOWN)));
-            cache.invalidate(uuid);
             user.setLastMaxAmount(0);
             player.sendMessage(Utils.color(bootstrap.getConfigManager().getMessage().
                     getProperty(MessagesProperty.PLAYER_COOLDOWN_TRIGGER).replace("{TIME}",
@@ -84,36 +79,9 @@ public class DailyLimitListener implements Listener {
                             getProperty(ConfigProperty.DAILY_LIMIT_COOLDOWN))));
         } else {
             // replace with the new amount
-            cache.put(uuid, difference);
             user.setLastMaxAmount(difference);
         }
         event.setAmount(expectedAmount);
-    }
-
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void onJoin(MonyCacheLoadEvent event) {
-        final User user = event.getLoadedUser();
-        final String uuid = user.getUniqueId().toString();
-
-        // This guard clause avoid setting LastMaxAmount to DAILY_LIMIT_MAX_AMOUNT
-        // Because the player is in cooldown meaning 'cachedAmount' will definitely return null
-        if (user.hasCooldown()) {
-            user.setLastMaxAmount(0);
-
-            // Just in case, invalidate the user's cache if for
-            // some reason it wasn't invalidated already
-            cache.invalidate(uuid);
-            return;
-        }
-
-        final Double cachedAmount = cache.getIfPresent(user.getUniqueId().toString());
-        if (cachedAmount == null) {
-            user.setLastMaxAmount(bootstrap.getConfigManager().getConfig().getProperty(ConfigProperty
-                    .DAILY_LIMIT_MAX_AMOUNT));
-            return;
-        }
-
-        user.setLastMaxAmount(cachedAmount);
     }
 
 }

@@ -42,6 +42,7 @@ public class ActionbarUtils {
                 Object cbc = iChatBaseComponentClass.cast(m3.invoke(chatSerializerClass, "{\"text\": \"" + message + "\"}"));
                 packet = packetPlayOutChatClass.getConstructor(new Class<?>[]{iChatBaseComponentClass, byte.class}).newInstance(cbc, (byte) 2);
             } else {
+
                 Class<?> chatComponentTextClass = Class.forName("net.minecraft.server." + version + ".ChatComponentText");
                 Class<?> iChatBaseComponentClass = Class.forName("net.minecraft.server." + version + ".IChatBaseComponent");
                 try {

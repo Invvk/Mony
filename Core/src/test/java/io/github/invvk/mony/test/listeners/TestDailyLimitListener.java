@@ -65,9 +65,6 @@ public class TestDailyLimitListener {
         // no matter what the original amount was.
         Assertions.assertEquals(expected, event.getAmount());
 
-        // Check if the user was removed from the cache. prevent saving up unnecessary data in-memory.
-        Assertions.assertNull(listener.getCache().getIfPresent(player.getName()));
-
         // Check if the user is in cooldown
         // The optional is always present because we created the user above.
         // so the optional#isPresent() check is unnecessary here, and we can just use optional#get Directly
