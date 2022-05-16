@@ -10,6 +10,9 @@ import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+import java.util.List;
+
 @RequiredArgsConstructor
 public class MonyExpansion extends PlaceholderExpansion {
 
@@ -23,6 +26,11 @@ public class MonyExpansion extends PlaceholderExpansion {
     @Override
     public boolean persist() {
         return true;
+    }
+
+    @Override
+    public @NotNull List<String> getPlaceholders() {
+        return Arrays.asList("mony_dl_cooldown", "mony_dl_amount_left");
     }
 
     @Override
