@@ -4,7 +4,7 @@ import io.github.invvk.mony.internal.MonyBootstrap;
 import io.github.invvk.mony.internal.database.storage.DummyStorage;
 import io.github.invvk.mony.internal.database.storage.FileStorage;
 import io.github.invvk.mony.internal.database.storage.MySQLStorage;
-import io.github.invvk.mony.api.config.properties.ConfigProperty;
+import io.github.invvk.mony.internal.config.properties.ConfigProperty;
 import io.github.invvk.mony.api.database.manager.IDataManager;
 import io.github.invvk.mony.api.database.misc.StorageMode;
 import io.github.invvk.mony.api.database.storage.IStorage;
