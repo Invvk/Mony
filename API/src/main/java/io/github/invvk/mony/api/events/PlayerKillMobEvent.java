@@ -27,6 +27,8 @@ public class PlayerKillMobEvent extends PlayerEvent implements Cancellable {
 
     private final double originalAmount;
 
+    private boolean preventDL;
+
     @Getter @Setter
     private boolean cancelled = false;
 
@@ -63,5 +65,14 @@ public class PlayerKillMobEvent extends PlayerEvent implements Cancellable {
      */
     public double getAmount() {
         return amount;
+    }
+
+    /**
+     * setting this to true will prevent any modification related to last max amount, and daily limit triggering.
+     * <br> <br> However, this WILL NOT TRIGGER IF THE PLAYER IS ON COOLDOWN.
+     * @return true if the modification of daily limit should be ignored.
+     */
+    public boolean isPreventDL() {
+        return preventDL;
     }
 }
