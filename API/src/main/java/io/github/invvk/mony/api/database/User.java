@@ -1,6 +1,7 @@
 package io.github.invvk.mony.api.database;
 
 import com.google.gson.annotations.Expose;
+import io.github.invvk.mony.api.utils.TimeUtils;
 import lombok.Data;
 
 import java.util.UUID;
@@ -39,6 +40,10 @@ public class User {
 
     public long getCooldownDifference() {
         return cooldown - System.currentTimeMillis();
+    }
+
+    public String getFormattedCooldown() {
+        return TimeUtils.translateTime(getCooldownDifference());
     }
 
 }
