@@ -61,6 +61,7 @@ public class TestDailyLimitListener {
         for (int i = 0; i < 40; i++)
             listener.onMobKill(event);
 
+        listener.onDailyLimit(event);
         // The daily limit should only allow to give the correct amount
         // no matter what the original amount was.
         Assertions.assertEquals(expected, event.getAmount());
