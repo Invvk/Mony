@@ -2,14 +2,11 @@ package io.github.invvk.mony.test.user;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
-import io.github.invvk.mony.internal.MonyLoader;
 import io.github.invvk.mony.api.database.User;
+import io.github.invvk.mony.internal.MonyLoader;
 import org.junit.jupiter.api.*;
 
 import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestUserManager {
 
@@ -41,18 +38,6 @@ public class TestUserManager {
         user.setCooldown(cooldown);
 
         Assertions.assertTrue(user.hasCooldown(), "cooldown didn't end, yet user#hasCooldown() returns false");
-    }
-
-    @Test
-    @DisplayName("check if user#matchesName() works correctly")
-    public void checkMatchesName() {
-        final User user = new User(UUID.randomUUID(), "Invvk");
-
-        user.setDbName("Invvk");
-        assertTrue(user.nameMatchesDB(), "User name didn't match (Val1: Invvk, Val2: Invvk)");
-
-        user.setDbName("Invvk2");
-        assertFalse(user.nameMatchesDB(), "User name matched (Val1: Invvk, Val2: Invvk2)");
     }
 
 }
