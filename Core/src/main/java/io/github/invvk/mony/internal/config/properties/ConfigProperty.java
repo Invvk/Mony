@@ -1,9 +1,9 @@
-package io.github.invvk.mony.api.config.properties;
+package io.github.invvk.mony.internal.config.properties;
 
 import ch.jalu.configme.Comment;
 import ch.jalu.configme.SettingsHolder;
 import ch.jalu.configme.properties.*;
-import io.github.invvk.mony.api.config.properties.bean.MobBean;
+import io.github.invvk.mony.internal.config.properties.bean.MobBean;
 
 public class ConfigProperty implements SettingsHolder {
 

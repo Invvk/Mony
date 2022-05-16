@@ -1,10 +1,10 @@
-package io.github.invvk.mony.api.config;
+package io.github.invvk.mony.internal.config;
 
 import ch.jalu.configme.SettingsHolder;
 import ch.jalu.configme.SettingsManager;
 import ch.jalu.configme.SettingsManagerBuilder;
-import io.github.invvk.mony.api.config.properties.ConfigProperty;
-import io.github.invvk.mony.api.config.properties.MessagesProperty;
+import io.github.invvk.mony.internal.config.properties.ConfigProperty;
+import io.github.invvk.mony.internal.config.properties.MessagesProperty;
 import lombok.Getter;
 
 import java.io.File;

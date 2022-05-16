@@ -1,4 +1,4 @@
-package io.github.invvk.mony.api.config.properties.bean;
+package io.github.invvk.mony.internal.config.properties.bean;
 
 import lombok.Getter;
 import lombok.Setter;

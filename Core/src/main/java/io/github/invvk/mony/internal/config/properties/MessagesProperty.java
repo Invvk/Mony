@@ -1,4 +1,4 @@
-package io.github.invvk.mony.api.config.properties;
+package io.github.invvk.mony.internal.config.properties;
 
 import ch.jalu.configme.SettingsHolder;
 import ch.jalu.configme.properties.Property;
