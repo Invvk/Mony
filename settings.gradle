@@ -1,1 +1,2 @@
 rootProject.name = 'Mony'
+include 'Core', 'API'

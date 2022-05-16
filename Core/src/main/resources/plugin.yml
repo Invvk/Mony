@@ -1,0 +1,7 @@
+name: Mony
+version: '${version}'
+main: io.github.invvk.mony.internal.MonyLoader
+depend:
+  - Vault
+softdepend:
+  - PlaceholderAPI
