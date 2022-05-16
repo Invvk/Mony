@@ -20,7 +20,7 @@ dependencies {
     //noinspection GradlePackageUpdate
     implementation 'com.zaxxer:HikariCP:4.0.3'
     implementation 'org.bstats:bstats-bukkit:3.0.0'
-    implementation ('io.github.invvk:actionbar-api:1.4')
+    implementation 'io.github.invvk:actionbar-api:1.4'
     implementation project(":API")
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
