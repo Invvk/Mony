@@ -53,7 +53,8 @@ public class MobKillListener implements Listener {
 
         hook.getEconomy().depositPlayer(killer, toDeposit);
 
-        ActionBarAPI.send(killer, Utils.color(bootstrap.getConfigManager()
+        if (!this.bootstrap.isTestEnvironment())
+            ActionBarAPI.send(killer, Utils.color(bootstrap.getConfigManager()
                 .getMessage().getProperty(MessagesProperty.MOB_KILL_ACTIONBAR).replace("{AMOUNT}",
                         String.valueOf(toDeposit)).replace("{MOB}", StringUtils.
                         capitalize(entity.getType().name().toLowerCase().replace("_", " ")))));
